@@ -2,14 +2,18 @@ library(shiny)
 
 shinyUI(fluidPage(
     
-    titlePanel(title = "Diamond price prediction tool", windowTitle = "Diamond price prediction tool"),
+    titlePanel(title = "Diamond price prediction tool", 
+               windowTitle = "Diamond price prediction tool"),
     hr(),
     sidebarLayout(
         
         sidebarPanel(
             tabsetPanel(
+                id = "tabset",
                 tabPanel(
                     title = "Manual input",
+                    value = "Manual",
+                    br(),
                     h4(em("Choose the parameters of your diamond below")),
                     hr(),
                     sliderInput("carat", label = "Choose carat", min = 0.2, 
@@ -30,14 +34,30 @@ shinyUI(fluidPage(
                                 selected = "IF")
                 ),
                 tabPanel(
-                    title = "Random simulation"
+                    title = "Random simulation",
+                    value = "Random",
+                    br(),
+                    h4(em("If you're feeling lazy, you can play with random
+                          simulation :)")),
+                    hr(),
+                    actionButton("random_gen", "Generate random parameters"),
+                    br(),
+                    br(),
+                    wellPanel(
+                        p("Parameters used for prediction of price:"),
+                        h4(code(paste0("carat <- ", "0.2"))),
+                        h4(code(paste0("cut <- ", "Premium"))),
+                        h4(code(paste0("color <- ", "E"))),
+                        h4(code(paste0("clarity <- ", "IF")))
+                    )
                 )
             )
         ),
         mainPanel(
             br(),
             h4("Predicted price of your diamond is"),
-            p(textOutput("result"))
+            h3(textOutput("result")),
+            verbatimTextOutput("tabset")
         )
     )
 ))
