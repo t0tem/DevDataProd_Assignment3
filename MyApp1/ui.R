@@ -32,6 +32,8 @@ shinyUI(fluidPage(
                                                "SI2", "VS1", "VS2", "VVS1",
                                                "VVS2", "IF (best)" = "IF"), 
                                 selected = "IF")
+                    #,
+                    #submitButton("Predict price")
                 ),
                 tabPanel(
                     title = "Random simulation",
@@ -44,12 +46,11 @@ shinyUI(fluidPage(
                     br(),
                     br(),
                     wellPanel(
-                        p("Parameters used for prediction of price:"),
-                        h4(code(paste0("carat <- ", "0.2"))),
-                        h4(code(paste0("cut <- ", "Premium"))),
-                        h4(code(paste0("color <- ", "E"))),
-                        h4(code(paste0("clarity <- ", "IF")))
+                        helpText("Parameters used for prediction of price:"),
+                        h4(code(htmlOutput("rParams")))
                     )
+                    #,
+                    #submitButton("Predict price")
                 )
             )
         ),
@@ -57,7 +58,8 @@ shinyUI(fluidPage(
             br(),
             h4("Predicted price of your diamond is"),
             h3(textOutput("result")),
-            verbatimTextOutput("tabset")
+            verbatimTextOutput("tabset"),
+            plotOutput("plot")
         )
     )
 ))
