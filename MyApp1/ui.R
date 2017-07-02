@@ -1,12 +1,10 @@
 library(shiny)
 
 shinyUI(fluidPage(
-    
     titlePanel(title = "Diamond price prediction tool", 
                windowTitle = "Diamond price prediction tool"),
     hr(),
     sidebarLayout(
-        
         sidebarPanel(
             tabsetPanel(
                 id = "tabset",
@@ -32,8 +30,6 @@ shinyUI(fluidPage(
                                                "SI2", "VS1", "VS2", "VVS1",
                                                "VVS2", "IF (best)" = "IF"), 
                                 selected = "IF")
-                    #,
-                    #submitButton("Predict price")
                 ),
                 tabPanel(
                     title = "Random simulation",
@@ -49,8 +45,6 @@ shinyUI(fluidPage(
                         helpText("Parameters used for prediction of price:"),
                         h4(code(htmlOutput("rParams")))
                     )
-                    #,
-                    #submitButton("Predict price")
                 )
             )
         ),
@@ -59,6 +53,15 @@ shinyUI(fluidPage(
             h4("Predicted price of your diamond is"),
             h3(textOutput("result")),
             verbatimTextOutput("tabset"),
+            selectInput("x", label = "Choose x axis", 
+                        choices = colnames(diamonds[c(1,5:10)]),
+                        selected = colnames(diamonds)[1]),
+            selectInput("y", label = "Choose y axis", 
+                        choices = colnames(diamonds[c(1,5:10)]),
+                        selected = colnames(diamonds)[7]),
+            selectInput("z", label = "Choose color", 
+                        choices = colnames(diamonds[c(2:4)]),
+                        selected = colnames(diamonds)[2]),
             plotOutput("plot")
         )
     )

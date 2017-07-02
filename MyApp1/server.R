@@ -2,17 +2,10 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 
-data <- ggplot2::diamonds
-fit <- lm(price ~ carat + cut + color + clarity, data = data)
+fit <- lm(price ~ carat + cut + color + clarity, data = diamonds)
 
 shinyServer(function(input, output) {
-    
-    # rv <- reactiveValues(data = data.frame())
-    # 
-    # observeEvent(input$norm, { rv$data <- rnorm(100) })
-    # observeEvent(input$unif, { rv$data <- runif(100) })    
-    
-    
+   
     dataRandom <- eventReactive(input$random_gen, {
         data.frame(carat = round(runif(1, 0.2, 20),2),
                    cut = sample(c("Fair", "Good", "Very Good",
@@ -57,7 +50,12 @@ shinyServer(function(input, output) {
     })
     
     output$plot <- renderPlot({
-        ggplot(data = data, aes(x = carat, y = price, color = cut)) + geom_point()
+        x <- diamonds[[input$x]]
+        y <- diamonds[[input$y]]
+        z <- diamonds[[input$z]]
+        qplot(x, y, color = z, xlab = input$x, ylab = input$y) +
+            labs(color = input$z) 
     })
+    
     
 })
