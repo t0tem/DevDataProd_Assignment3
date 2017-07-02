@@ -26,8 +26,8 @@ shinyUI(navbarPage(
                         helpText("You can also play with the plot visualizing the global 'Diamonds' dataset.
                                 Check out the draggable window letting you choose the axes of the plot!"),
                         helpText(
-                            "Now go ahead! Switch to the App at the top of 
-                            the page and calculate your diamond price!"),
+                            "Now go ahead! ", span("Switch to the App at the top of 
+                            the page", style = "color:blue")," and calculate your diamond price!"),
                         helpText(
                             style="text-align: right;",
                             "Any comments and contribution are welcome on", 
