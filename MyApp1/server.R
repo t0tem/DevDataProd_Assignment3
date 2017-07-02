@@ -1,7 +1,4 @@
-#loading libraries
 library(shiny)
-library(dplyr)
-library(ggplot2)
 
 #fitting model. done outside server function to run only once per R session, 
 #and not for every user connected
