@@ -5,7 +5,7 @@ library(ggplot2)
 fit <- lm(price ~ carat + cut + color + clarity, data = diamonds)
 
 shinyServer(function(input, output) {
-   
+    
     dataRandom <- eventReactive(input$random_gen, {
         data.frame(carat = round(runif(1, 0.2, 20),2),
                    cut = sample(c("Fair", "Good", "Very Good",
@@ -22,9 +22,9 @@ shinyServer(function(input, output) {
                        color = input$color,
                        clarity = input$clarity)
         } else {
-           dataRandom()
+            dataRandom()
         }
-    
+        
     })
     
     pred <- reactive({
@@ -37,7 +37,9 @@ shinyServer(function(input, output) {
     })
     
     output$result <- renderText({pred()})
-    output$tabset <- renderText({input$tabset})
+    
+    output$diam_size <- renderText({newData()$carat / 20 * 200})
+    
     
     #random parameters (to draw on sidebar)
     #credits to 'https://stackoverflow.com/questions/23233497/outputting-multiple-lines-of-text-with-rendertext-in-r-shiny'
@@ -53,9 +55,20 @@ shinyServer(function(input, output) {
         x <- diamonds[[input$x]]
         y <- diamonds[[input$y]]
         z <- diamonds[[input$z]]
-        qplot(x, y, color = z, xlab = input$x, ylab = input$y) +
-            labs(color = input$z) 
+        qplot(x, y, color = z, xlab = input$x, ylab = input$y, 
+              main = "Diamonds dataset visualization") +
+            labs(color = input$z) + 
+            theme(plot.title = element_text(size=20, hjust = 0.5))
     })
+    
+    output$diamond_img <- renderImage({
+        list(
+            src = "www/Diamond.png",
+            contentType = "image/png",
+            height = max(8,newData()$carat * 10),
+            alt = "Diamond"
+        )
+    }, deleteFile = FALSE)
     
     
 })

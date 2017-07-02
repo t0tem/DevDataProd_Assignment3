@@ -15,7 +15,7 @@ shinyUI(fluidPage(
                     h4(em("Choose the parameters of your diamond below")),
                     hr(),
                     sliderInput("carat", label = "Choose carat", min = 0.2, 
-                                max = 20, value = 0.2, step = 0.1),
+                                max = 20, value = 2.5, step = 0.1),
                     radioButtons("cut", label = "Choose cut",
                                  choices = list("Fair", "Good", "Very Good",
                                                 "Premium", "Ideal"), 
@@ -50,19 +50,52 @@ shinyUI(fluidPage(
         ),
         mainPanel(
             br(),
-            h4("Predicted price of your diamond is"),
-            h3(textOutput("result")),
-            verbatimTextOutput("tabset"),
-            selectInput("x", label = "Choose x axis", 
-                        choices = colnames(diamonds[c(1,5:10)]),
-                        selected = colnames(diamonds)[1]),
-            selectInput("y", label = "Choose y axis", 
-                        choices = colnames(diamonds[c(1,5:10)]),
-                        selected = colnames(diamonds)[7]),
-            selectInput("z", label = "Choose color", 
-                        choices = colnames(diamonds[c(2:4)]),
-                        selected = colnames(diamonds)[2]),
-            plotOutput("plot")
+            fluidRow(
+                column(1),
+                column(
+                    4,
+                    h4("Predicted price of your diamond is"),
+                    h3(textOutput("result"))
+                ),
+                column(
+                    5,
+                    wellPanel(
+                        style="text-align: center;",
+                        h5("And that's an approximate size of your diamond"),
+                        imageOutput("diamond_img", height = "100%"),
+                        helpText(em("Though I'm not a specialist at all..."))
+                    )
+                    
+                ),
+                column(1)
+            ),
+            br(),
+            #br(),
+            
+            plotOutput("plot"),
+            
+            absolutePanel(
+                bottom = 20, right = 120, width = 350,
+                draggable = TRUE,
+                style = "opacity: 0.8",
+                wellPanel(
+                    p("Below you can customize the axes of the plot"),
+                    div(style="display: inline-block;vertical-align:top; width: 100px;",
+                        selectInput("x", label = "x axis", 
+                                    choices = colnames(diamonds[c(1,5:10)]),
+                                    selected = colnames(diamonds)[1])),
+                    div(style="display: inline-block;vertical-align:top; width: 100px;",
+                        selectInput("y", label = "y axis", 
+                                    choices = colnames(diamonds[c(1,5:10)]),
+                                    selected = colnames(diamonds)[7])),
+                    div(style="display: inline-block;vertical-align:top; width: 100px;",
+                        selectInput("z", label = "color", 
+                                    choices = colnames(diamonds[c(2:4)]),
+                                    selected = colnames(diamonds)[2])
+                    ),
+                    helpText(em("This panel is draggable"))
+                )   
+            )
         )
     )
 ))
