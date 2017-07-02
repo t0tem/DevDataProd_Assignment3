@@ -65,15 +65,10 @@ shinyUI(fluidPage(
                         imageOutput("diamond_img", height = "100%"),
                         helpText(em("Though I'm not a specialist at all..."))
                     )
-                    
-                ),
-                column(1)
+                )
             ),
             br(),
-            #br(),
-            
             plotOutput("plot"),
-            
             absolutePanel(
                 bottom = 20, right = 120, width = 350,
                 draggable = TRUE,
