@@ -43,8 +43,8 @@ Links
 The full App is available under the following link
 <https://t0tem.shinyapps.io/diamond_prediction_app/>
 
-The the code of `ui.R` and `server.R` can be found on github:
-<https://github.com/t0tem/DevDataProd_Assignment3/tree/master/MyApp1>
+The code of `ui.R` and `server.R` can be found on github:  
+<https://github.com/t0tem/DevDataProd_Assignment3/tree/master/MyApp1>  
 (also `global.R` as I needed the dataset to be loaded for both ui and the server)
 
 So go ahead, try it! ;)
