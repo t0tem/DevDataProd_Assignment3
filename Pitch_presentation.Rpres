@@ -1,0 +1,29 @@
+Pitch Presentation for Shiny App predicting the price of a diamond 
+========================================================
+author: Vadim K.
+date: 01.07.2017
+autosize: true
+
+Purpose of the App
+========================================================
+
+The app was built as a part of the Course Project on Data Science specialization from Johns Hopkins University on Coursera.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Slide With Code
+========================================================
+
+```{r}
+library(ggplot2)
+qplot(carat, price, data = diamonds)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
