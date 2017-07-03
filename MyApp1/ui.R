@@ -2,6 +2,7 @@ library(shiny)
 
 shinyUI(navbarPage(
     title = "",
+    windowTitle = "Diamond price prediction tool",
     tabPanel(
         "Documentation (how to use the app)",
         fluidPage(
@@ -43,8 +44,7 @@ shinyUI(navbarPage(
     tabPanel(
         "The App itself",
         fluidPage(
-            titlePanel(title = "Diamond price prediction tool", 
-                       windowTitle = "Diamond price prediction tool"),
+            titlePanel(title = "Diamond price prediction tool"),
             hr(),
             sidebarLayout(
                 sidebarPanel(
